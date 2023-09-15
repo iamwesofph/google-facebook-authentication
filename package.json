@@ -45,7 +45,8 @@
         "nodemon": "^3.0.1",
         "passport": "^0.6.0",
         "passport-facebook": "^3.0.0",
+        "passport-google-oidc": "^0.1.0",
         "pluralize": "^8.0.0",
-        "sqlite3": "^5.0.2"
+        "sqlite3": "^5.1.6"
     }
 }

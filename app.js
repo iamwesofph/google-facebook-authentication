@@ -1,10 +1,12 @@
 require("dotenv").config();
+
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+//Add session support
 var session = require("express-session");
 var passport = require("passport");
 var SQLiteStore = require("connect-sqlite3")(session);
@@ -26,14 +28,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+//Add session support
 app.use(
     session({
-        secret: "keyboard cat",
+        secret: "x kitten",
         resave: false,
         saveUninitialized: false,
         store: new SQLiteStore({ db: "sessions.db", dir: "./var/db" }),
     })
 );
+//Authenticate the session
 app.use(passport.authenticate("session"));
 
 app.use("/", indexRouter);
