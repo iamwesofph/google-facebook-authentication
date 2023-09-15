@@ -11,9 +11,8 @@ passport.use(
             clientID: process.env["FACEBOOK_CLIENT_ID"],
             clientSecret: process.env["FACEBOOK_CLIENT_SECRET"],
             // callbackURL: "/oauth2/redirect/facebook",
-            callbackURL: "/auth/facebook/callback",
+            callbackURL: "https://google-facebook-authentication.onrender.com/oauth2/redirect/facebook",
             state: true,
-            proxy: true,
         },
         function verify(accessToken, refreshToken, profile, cb) {
             db.get("SELECT * FROM federated_credentials WHERE provider = ? AND subject = ?", ["https://www.facebook.com", profile.id], function (err, row) {
