@@ -10,8 +10,10 @@ passport.use(
         {
             clientID: process.env["FACEBOOK_CLIENT_ID"],
             clientSecret: process.env["FACEBOOK_CLIENT_SECRET"],
-            // callbackURL: "/oauth2/redirect/facebook",
-            callbackURL: "https://google-facebook-authentication.onrender.com/oauth2/redirect/facebook",
+            callbackURL:
+                process.env.NODE_ENV === "production" // Need to specify complete URL for production to work because redirect URI is checked by facebook and google.
+                    ? "https://google-facebook-authentication.onrender.com/oauth2/redirect/facebook"
+                    : "/oauth2/redirect/facebook",
             state: true,
         },
         function verify(accessToken, refreshToken, profile, cb) {
@@ -58,8 +60,10 @@ passport.use(
         {
             clientID: process.env["GOOGLE_CLIENT_ID"],
             clientSecret: process.env["GOOGLE_CLIENT_SECRET"],
-            // callbackURL: "/oauth2/redirect/google",
-            callbackURL: "https://google-facebook-authentication.onrender.com/oauth2/redirect/google",
+            callbackURL:
+                process.env.NODE_ENV === "production" // Need to specify complete URL for production to work because redirect URI is checked by facebook and google.
+                    ? "https://google-facebook-authentication.onrender.com/oauth2/redirect/google"
+                    : "/oauth2/redirect/google",
             scope: ["profile"],
         },
         function verify(issuer, profile, cb) {
